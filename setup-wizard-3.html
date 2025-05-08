@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beállítás Varázsló - JinnGarden</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-bg: #F7FFF4;
+            --secondary-bg: #F4FFFA;
+            --primary-text: #274E13;
+            --accent-bg: #EDFFEA;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div class="max-w-md mx-auto bg-white min-h-screen shadow-lg">
+        <!-- Header -->
+        <header class="p-4 bg-white border-b border-gray-200">
+            <div class="flex items-center justify-between">
+                <img src="logo.png" alt="JinnGarden Logo" class="h-8">
+                <button onclick="window.location.href='index.html'" class="text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="p-4 bg-white border-b border-gray-200">
+            <div class="flex justify-between mb-2">
+                <span class="text-sm font-medium text-green-600">3. lépés a 3-ból</span>
+                <span class="text-sm text-gray-500">Áttekintés & Befejezés</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-green-600 h-2 rounded-full" style="width: 100%"></div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="p-4">
+            <h1 class="text-2xl font-bold mb-6">Kert Beállításának Áttekintése</h1>
+            
+            <!-- Selected Options -->
+            <div class="space-y-6">
+                <!-- Plants Selection -->
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                    <h3 class="font-semibold mb-3">Kiválasztott Növények</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Fűszernövények</span>
+                            <span class="text-sm text-green-600">Kiválasztva</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Leveles Zöldségek</span>
+                            <span class="text-sm text-green-600">Kiválasztva</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Size -->
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                    <h3 class="font-semibold mb-3">Rendszer Mérete</h3>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-600">Közepes (Mosogatógép méretű)</span>
+                        <span class="text-sm text-green-600">Kiválasztva</span>
+                    </div>
+                </div>
+
+                <!-- Estimated Timeline -->
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                    <h3 class="font-semibold mb-3">Becsült Idővonal</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Beállítási Idő</span>
+                            <span class="text-sm">2-3 óra</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-600">Első Aratás</span>
+                            <span class="text-sm">4-6 hét</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                    <h3 class="font-semibold mb-3">Következő Lépések</h3>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-600 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Rendelje meg a hidroponikus rendszert</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-600 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Kapja meg a beállítási útmutatót</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-green-600 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Kezdje el termesztési útját</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-gray-200 p-4">
+                <div class="flex justify-between">
+                    <button onclick="window.location.href='setup-wizard-2.html'" class="px-6 py-2 text-gray-600 hover:bg-gray-100 rounded-lg">
+                        Vissza
+                    </button>
+                    <button onclick="window.location.href='index.html'" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                        Beállítás Befejezése
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 
