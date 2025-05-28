@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Asszisztens - JinnGarden</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/chat.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <img src="logo.png" alt="JinnGarden Logo" class="app-logo">
+            <button class="btn-icon" aria-label="Értesítések">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9">
+                    </path>
+                </svg>
+            </button>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content p-4">
+            <!-- <h1 class="text-2xl font-bold mb-6 animate-on-load">AI Kerti Asszisztens</h1>
+
+            <p class="text-gray mb-4 animate-on-load">
+                Üdvözöljük a JinnGarden AI Asszisztens oldalán! Töltsön fel egy képet a problémás növényéről, és
+                asszisztensünk segít azonosítani a problémát és megoldást javasolni.
+            </p> -->
+
+            <!-- Chat Container -->
+            <div class="chat-container animate-on-load">
+                <div class="chat-header">
+                    <img src="jinn.png" alt="Jinn Asszisztens" class="assistant-avatar">
+                    <div class="chat-title">Jinn Kerti Asszisztens</div>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Assistant Welcome Message -->
+                    <div class="message message-assistant">
+                        <div class="message-content">
+                            Üdvözlöm! Én vagyok Jinn, az AI kerti asszisztense. Miben segíthetek ma?.
+                        </div>
+                        <div class="message-time">Ma, 10:00</div>
+                    </div>
+
+                    <!-- Example User Message with Image -->
+                    <div class="message message-user">
+                        <div class="message-content">
+                            Szia! A Saláta levelei sárgulnak. Mi lehet a probléma?
+                            <img src="https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHllbGxvdyUyMGxlYWZ8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+                                alt="Sárguló paradicsom levelek" class="message-image"
+                                onclick="openImageModal(this.src)">
+                        </div>
+                        <div class="message-time">Ma, 10:05</div>
+                    </div>
+
+                    <!-- Example Assistant Response -->
+                    <div class="message message-assistant">
+                        <div class="message-content">
+                            A képen látható saláta levelek sárgulása több okból is előfordulhat:
+                            <br><br>
+                            1. <strong>Tápanyaghiány</strong>: Leggyakrabban nitrogén, vas vagy magnézium hiánya okozhat
+                            sárgulást.
+                            <br><br>
+                            2. <strong>Túlöntözés</strong>: A túl sok víz kimoshatja a tápanyagokat és gyökérproblémákat
+                            okozhat.
+                            <br><br>
+                            3. <strong>Alulöntözés</strong>: A vízhiány is okozhat levélsárgulást.
+                            <br><br>
+                            4. <strong>pH-érték problémák</strong>: Ha a talaj vagy a tápoldatos víz pH-értéke nem
+                            megfelelő (ideális: 6.0-6.5), a növény nem tudja felvenni a tápanyagokat.
+                            <br><br>
+                            Javaslat: Ellenőrizze a talaj nedvességét, és adjon a növénynek kiegyensúlyozott,
+                            paradicsomokhoz való tápoldatot. Figyeljen a pH-értékre is. Ha a probléma továbbra is
+                            fennáll, küldjön újabb képet a növény egészéről.
+                        </div>
+                        <div class="message-time">Ma, 10:07</div>
+                    </div>
+                </div>
+
+                <div class="chat-input-container">
+                    <textarea id="chatInput" class="chat-input" placeholder="Írja le a problémát..."
+                        rows="1"></textarea>
+                    <div class="chat-actions">
+                        <button class="chat-button" id="uploadButton" aria-label="Kép feltöltése">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                        </button>
+                        <input type="file" id="fileInput" class="file-input" accept="image/*">
+                        <button class="chat-button" id="sendButton" aria-label="Küldés">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Image Preview Container (Hidden by Default) -->
+                <div id="imagePreviewContainer" class="image-preview-container" style="display: none;">
+                    <img id="imagePreview" class="image-preview" src="" alt="Feltöltött kép előnézete">
+                    <div class="image-preview-text">Kép kiválasztva</div>
+                    <div class="remove-image" id="removeImage">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Image Modal -->
+            <div id="imageModal" class="modal">
+                <span class="modal-close" onclick="closeImageModal()">&times;</span>
+                <img class="modal-content" id="modalImage">
+            </div>
+        </main>
+
+        <!-- Navigation -->
+        <nav class="nav-bottom">
+            <div class="nav-container">
+                <a href="index.html" class="nav-item">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                        </path>
+                    </svg>
+                    <span class="nav-text">Főoldal</span>
+                </a>
+                <a href="plants.html" class="nav-item">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                        </path>
+                    </svg>
+                    <span class="nav-text">Növények</span>
+                </a>
+                <a href="community.html" class="nav-item">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z">
+                        </path>
+                    </svg>
+                    <span class="nav-text">Közösség</span>
+                </a>
+                <a href="assistant.html" class="nav-item active">
+                    <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                        </path>
+                    </svg>
+                    <span class="nav-text">Asszisztens</span>
+                </a>
+            </div>
+        </nav>
+    </div>
+
+    <script>
+        // Chat functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const chatInput = document.getElementById('chatInput');
+            const sendButton = document.getElementById('sendButton');
+            const uploadButton = document.getElementById('uploadButton');
+            const fileInput = document.getElementById('fileInput');
+            const chatMessages = document.getElementById('chatMessages');
+            const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+            const imagePreview = document.getElementById('imagePreview');
+            const removeImage = document.getElementById('removeImage');
+
+            // Auto-resize textarea
+            chatInput.addEventListener('input', function () {
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+
+                // Enable send button if there's text
+                sendButton.disabled = this.value.trim() === '' && !imagePreviewContainer.style.display === 'flex';
+            });
+
+            // Upload image button
+            uploadButton.addEventListener('click', function () {
+                fileInput.click();
+            });
+
+            // File input change
+            fileInput.addEventListener('change', function () {
+                if (this.files && this.files[0]) {
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        imagePreview.src = e.target.result;
+                        imagePreviewContainer.style.display = 'flex';
+                        sendButton.disabled = false;
+                    }
+
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+
+            // Remove image
+            removeImage.addEventListener('click', function () {
+                imagePreviewContainer.style.display = 'none';
+                fileInput.value = '';
+                sendButton.disabled = chatInput.value.trim() === '';
+            });
+
+            // Send message
+            sendButton.addEventListener('click', sendMessage);
+            chatInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            function sendMessage() {
+                const message = chatInput.value.trim();
+                const hasImage = imagePreviewContainer.style.display === 'flex';
+
+                if (message === '' && !hasImage) return;
+
+                // Get current time
+                const now = new Date();
+                const timeString = `Ma, ${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`;
+
+                // Create user message
+                let messageHTML = `
+                    <div class="message message-user">
+                        <div class="message-content">
+                            ${message}
+                            ${hasImage ? `<img src="${imagePreview.src}" alt="Feltöltött kép" class="message-image" onclick="openImageModal(this.src)">` : ''}
+                        </div>
+                        <div class="message-time">${timeString}</div>
+                    </div>
+                `;
+
+                chatMessages.insertAdjacentHTML('beforeend', messageHTML);
+
+                // Clear input and reset
+                chatInput.value = '';
+                chatInput.style.height = 'auto';
+                imagePreviewContainer.style.display = 'none';
+                fileInput.value = '';
+                sendButton.disabled = true;
+
+                // Scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                // Simulate assistant typing
+                setTimeout(function () {
+                    const typingIndicator = `
+                        <div class="typing-indicator" id="typingIndicator">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    `;
+                    chatMessages.insertAdjacentHTML('beforeend', typingIndicator);
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                    // Simulate assistant response after typing
+                    setTimeout(function () {
+                        document.getElementById('typingIndicator').remove();
+
+                        // Different responses based on content
+                        let responseText = '';
+
+                        if (hasImage && message.toLowerCase().includes('paradicsom')) {
+                            responseText = `
+                                A képen látható paradicsom problémája valószínűleg tápanyaghiányra utal. A levelek sárgulása gyakran nitrogén, vas vagy magnézium hiányát jelzi.
+                                <br><br>
+                                Javaslataim:
+                                <br><br>
+                                1. <strong>Tápoldatozás</strong>: Használjon paradicsomokhoz való speciális tápoldatot hetente egyszer.
+                                <br><br>
+                                2. <strong>pH-érték ellenőrzése</strong>: Biztosítsa, hogy a talaj vagy a tápoldatos víz pH-értéke 6.0-6.5 között legyen.
+                                <br><br>
+                                3. <strong>Öntözés</strong>: Figyeljen a megfelelő öntözésre, ne öntözze túl a növényt.
+                                <br><br>
+                                Ha a probléma két hét után sem javul, érdemes lehet átültetni a növényt friss, tápanyagban gazdag talajba.
+                            `;
+                        } else if (hasImage && message.toLowerCase().includes('saláta')) {
+                            responseText = `
+                                A saláta levelein látható problémák több okra is visszavezethetők:
+                                <br><br>
+                                1. <strong>Hőmérséklet</strong>: A saláta hűvösebb körülményeket kedvel, 15-20°C között fejlődik a legjobban. A túl magas hőmérséklet stresszt okozhat.
+                                <br><br>
+                                2. <strong>Vízellátás</strong>: A saláta szereti a nedves, de nem túlöntözött talajt. Egyenletes vízellátást igényel.
+                                <br><br>
+                                3. <strong>Kártevők</strong>: Ellenőrizze a levelek alját levéltetvek vagy más kártevők után kutatva.
+                                <br><br>
+                                Javaslom, hogy biztosítson hűvösebb környezetet, figyeljen az egyenletes öntözésre, és használjon enyhe, szerves tápoldatot.
+                            `;
+                        } else if (hasImage) {
+                            responseText = `
+                                A képen látható növény problémája több tényezőre is visszavezethető lehet:
+                                <br><br>
+                                1. <strong>Tápanyaghiány vagy túladagolás</strong>: A levelek elszíneződése gyakran tápanyagproblémákra utal.
+                                <br><br>
+                                2. <strong>Öntözési problémák</strong>: Mind a túl sok, mind a túl kevés víz stresszt okozhat a növénynek.
+                                <br><br>
+                                3. <strong>Fényviszonyok</strong>: Ellenőrizze, hogy a növény megfelelő mennyiségű fényt kap-e.
+                                <br><br>
+                                4. <strong>Kártevők vagy betegségek</strong>: Vizsgálja meg alaposan a növényt kártevők vagy betegségek jelei után kutatva.
+                                <br><br>
+                                Javaslom, hogy ellenőrizze a talaj nedvességét, a fényviszonyokat, és használjon kiegyensúlyozott tápoldatot. Ha a probléma továbbra is fennáll, küldjön újabb, részletesebb képet a növényről.
+                            `;
+                        } else {
+                            responseText = `
+                                Köszönöm az üzenetét! Ahhoz, hogy pontosabb diagnózist adhassak, kérem, küldjön egy képet a problémás növényről. A képen lehetőleg látszódjon a teljes növény, valamint közelről a problémás részek is.
+                                <br><br>
+                                Segítene, ha megosztaná a következő információkat is:
+                                <br><br>
+                                - Milyen növényről van szó?
+                                - Mióta tapasztalja a problémát?
+                                - Milyen körülmények között tartja a növényt (fény, hőmérséklet, páratartalom)?
+                                - Milyen gyakran és hogyan öntözi?
+                                - Használ-e tápoldatot vagy más növénytápot?
+                            `;
+                        }
+
+                        const assistantResponse = `
+                            <div class="message message-assistant">
+                                <div class="message-content">
+                                    ${responseText}
+                                </div>
+                                <div class="message-time">${timeString}</div>
+                            </div>
+                        `;
+
+                        chatMessages.insertAdjacentHTML('beforeend', assistantResponse);
+                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                    }, 2000);
+
+                }, 1000);
+            }
+        });
+
+        // Image modal functionality
+        function openImageModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'flex';
+            modalImg.src = src;
+        }
+
+        function closeImageModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+    </script>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>

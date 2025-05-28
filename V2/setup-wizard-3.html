@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beállítás Varázsló - JinnGarden</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <img src="logo.png" alt="JinnGarden Logo" class="app-logo">
+            <button class="btn-icon" aria-label="Bezárás" onclick="window.location.href='index.html'">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="wizard-progress">
+            <div class="wizard-step-info">
+                <span class="wizard-step-current">3. lépés a 3-ból</span>
+                <span class="wizard-step-title">Áttekintés & Befejezés</span>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" data-progress="100" style="width: 100%"></div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content p-4">
+            <h1 class="text-2xl font-bold mb-6 animate-on-load">Kert beállításának áttekintése</h1>
+            
+            <!-- Selected Options -->
+            <div class="space-y-6">
+                <!-- Plants Selection -->
+                <div class="card animate-on-load">
+                    <h3 class="font-semibold mb-3">Kiválasztott Növények</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray">Fűszernövények</span>
+                            <span class="text-sm text-accent">Kiválasztva</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray">Leveles Zöldségek</span>
+                            <span class="text-sm text-accent">Kiválasztva</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Size -->
+                <div class="card animate-on-load">
+                    <h3 class="font-semibold mb-3">Rendszer Mérete</h3>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray">Közepes (Mosogatógép méretű)</span>
+                        <span class="text-sm text-accent">Kiválasztva</span>
+                    </div>
+                </div>
+
+                <!-- Estimated Timeline -->
+                <div class="card animate-on-load">
+                    <h3 class="font-semibold mb-3">Becsült Idővonal</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray">Beállítási Idő</span>
+                            <span class="text-sm">2-3 óra</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray">Első Aratás</span>
+                            <span class="text-sm">4-6 hét</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div class="card animate-on-load">
+                    <h3 class="font-semibold mb-3">Következő Lépések</h3>
+                    <ul class="space-y-2 text-sm text-gray">
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-accent mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Rendelje meg a hidroponikus rendszert</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-accent mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Kapja meg a beállítási útmutatót</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-5 h-5 text-accent mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span>Kezdje el termesztési útját</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Visual Preview -->
+                <div class="card animate-on-load">
+                    <h3 class="font-semibold mb-3">Az Ön Rendszere</h3>
+                    <div class="bg-secondary rounded-lg p-4 flex items-center justify-center">
+                        <div class="w-full h-48 bg-cover bg-center rounded-lg" style="background-image: url('https://images.unsplash.com/photo-1585444744772-62976a6759af?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8aHlkcm9wb25pY3N8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60')"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white border-t border-gray-200 p-4">
+                <div class="flex justify-between">
+                    <button onclick="window.location.href='setup-wizard-2.html'" class="btn btn-secondary">
+                        Vissza
+                    </button>
+                    <button onclick="window.location.href='index.html'" class="btn btn-primary">
+                        Beállítás Befejezése
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
